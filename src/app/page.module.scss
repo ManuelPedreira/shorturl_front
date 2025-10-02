@@ -1,0 +1,40 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(165deg, var(--middle), var(--darkest), var(--darker));
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width);
+  width: 100%;
+  padding: 10%;
+  gap: 4rem;
+}
+
+.input_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+}
+
+.input {
+  flex-grow: 1;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  transition: box-shadow 1s;
+}
+
+.button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  transition: box-shadow 1s;
+}
