@@ -2,12 +2,16 @@
 
 import createNewUrl from "@/lib/actions/createNewUrl";
 import styles from "./UrlForm.module.scss";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 
 const UrlForm = () => {
   const [state, formAction, pending] = useActionState(createNewUrl, null);
 
-  console.log(state);
+  useEffect(() => {
+    if (state?.data) {
+      console.log(state.data);
+    }
+  }, [state]);
 
   return (
     <form action={formAction} className={styles.input_container}>

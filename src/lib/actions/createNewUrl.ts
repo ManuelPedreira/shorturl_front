@@ -1,51 +1,44 @@
 "use server";
 
-import { z } from "zod";
 import { createUrl } from "../api/apiCalls";
 import { ActionResult } from "next/dist/server/app-render/types";
-
-const schema = z.object({
-  url: z
-    .string("Invalid URL")
-    .min(5, "URL can't be less than 5 characters")
-    .regex(/.*\..*/, "URL must contain at least one dot (.)")
-    .transform((url) => {
-      if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        return `https://${url}`;
-      }
-      return url;
-    })
-    .refine((url) => {
-      try {
-        new URL(url);
-        return true;
-      } catch {
-        return false;
-      }
-    }, "Please insert a valid URL"),
-});
+import urlValidator from "../validations/urlValidator";
+import { redirect } from "next/navigation";
+import { AxiosError } from "axios";
+import { cookies } from "next/headers";
 
 const createNewUrl = async (
   initialState: ActionResult,
   formData: FormData
 ): Promise<ActionResult> => {
-  const validatedFields = schema.safeParse({ url: formData.get("url") });
+  const validatedFields = urlValidator(formData.get("url"));
 
   if (!validatedFields.success) {
     return {
       success: false,
-      errors: validatedFields.error.issues[0]?.message,
+      errors: validatedFields.error.parsedError,
     };
-  } else {
-    return createUrl({ url: validatedFields.data.url })
-      .then((data) => ({
-        success: true,
-        message: data.shortUrl,
-      }))
-      .catch((e) => ({
+  }
+
+  try {
+    const data = await createUrl({ url: validatedFields.data.url });
+    const cookieStore = await cookies();
+    cookieStore.set("shortUrlData", JSON.stringify(data), {
+      httpOnly: true,
+      path: "/success",
+      maxAge: 10,
+    });
+
+    redirect(`/success`);
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      return {
         success: false,
         errors: e.response ? e.response.data?.detail : e.message,
-      }));
+      };
+    } else {
+      throw e;
+    }
   }
 };
 
