@@ -29,7 +29,7 @@ export const useUrlUpdates = (shortCode: string) => {
       debug: (str) => console.log("[STOMP]", str),
     });
 
-    stompClient.onConnect = () => {
+    stompClient.onConnect = async () => {
       console.log("WebSocket connected....");
       setConnected(true);
 

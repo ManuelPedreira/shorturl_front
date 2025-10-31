@@ -2,25 +2,35 @@
 
 import createNewUrl from "@/lib/actions/createNewUrl";
 import styles from "./UrlForm.module.scss";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 
 const UrlForm = () => {
   const [state, formAction, pending] = useActionState(createNewUrl, null);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (state?.data) {
-      console.log(state.data);
+    if (state?.errors) {
+      setIsError(true);
     }
   }, [state]);
 
   return (
-    <form action={formAction} className={styles.input_container}>
-      <input className={styles.input} name="url" placeholder="http://" />
-      <button className={styles.button} type="submit" disabled={pending}>
-        Shorten!
-      </button>
-      <p>{state?.message}</p>
-      <p>{state?.errors}</p>
+    <form action={formAction}>
+      <div className={styles.input_container}>
+        <input
+          className={styles.input}
+          name="url"
+          placeholder="http://"
+          onChange={() => setIsError(false)}
+        />
+        <button className={styles.button} type="submit" disabled={pending || isError}>
+          {pending ? <span className={styles.spinner} /> : null}
+          <span className={pending ? styles.buttonHideText : ""}>Shorten!</span>
+        </button>
+      </div>
+      <div className={styles.error_container}>
+        {isError && <p className={styles.error}>{state?.errors}</p>}
+      </div>
     </form>
   );
 };

@@ -1,0 +1,39 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width);
+  width: 100%;
+  padding: 10%;
+  gap: 2rem;
+}
+
+.card {
+  box-shadow: 0 0 30px 5px var(--middle);
+  outline: 1px solid var(--middle-light);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+}
+
+.label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 0.5rem;
+}
+
+.noData {
+  font-size: 1.2rem;
+  color: var(--lighter);
+}
