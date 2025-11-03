@@ -18,7 +18,7 @@ const UrlForm = () => {
     <form action={formAction}>
       <div className={styles.input_container}>
         <input
-          className={styles.input}
+          className={`${styles.input} ${isError ? styles.inputError : ""}`}
           name="url"
           placeholder="http://"
           onChange={() => setIsError(false)}

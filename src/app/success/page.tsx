@@ -15,18 +15,20 @@ export default async function SuccessPage() {
 
         {parsed ? (
           <div className={styles.card}>
-            <div>
-              <p className={styles.label}>Original URL:</p>
-              <a href={parsed.originalUrl} target="_blank" rel="noopener noreferrer">
-                {parsed.originalUrl}
-              </a>
-            </div>
+            <div className={styles.url_container}>
+              <div>
+                <p className={styles.label}>Original URL:</p>
+                <a href={parsed.originalUrl} target="_blank" rel="noopener noreferrer">
+                  {parsed.originalUrl}
+                </a>
+              </div>
 
-            <div>
-              <p className={styles.label}>Short URL:</p>
-              <a href={parsed.shortUrl} target="_blank" rel="noopener noreferrer">
-                {parsed.shortUrl}
-              </a>
+              <div>
+                <p className={styles.label}>Short URL:</p>
+                <a href={parsed.shortUrl} target="_blank" rel="noopener noreferrer">
+                  {parsed.shortUrl}
+                </a>
+              </div>
             </div>
 
             <Suspense>

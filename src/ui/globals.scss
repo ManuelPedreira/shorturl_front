@@ -1,3 +1,5 @@
+@use './_mixins.scss' as mixins;
+
 :root {
   // https://kigen.design/color
   --chetwode-blue-50: #d6e1f5;
@@ -20,14 +22,20 @@
   --lighter: var(--chetwode-blue-100);
   --lightest: var(--chetwode-blue-50);
 
-  --phone-max-width: 600px;
+  --error: #9c0000;
+
   --max-width: 1200px;
 }
 
 html,
 body {
+  padding: 0 1rem;
   max-width: 100vw;
   min-height: 100vh;
+
+  @include mixins.bp(md) {
+    padding: 0 2rem;
+  }
 }
 
 body {

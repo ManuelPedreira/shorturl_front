@@ -1,22 +1,33 @@
+@use "../../../../ui/_mixins.scss" as mixins;
+
 .details {
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.2rem;
+  gap: 3rem;
+  transition: all 0.3s linear;
+
+  animation: growIn 0.3s ease-out forwards;
+  overflow: hidden;
+
+  @include mixins.bp(md) {
+    flex-direction: row;
+  }
 }
 
 .thumbnail {
-  width: 100%;
   max-width: 400px;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 
   img {
     width: 100%;
     height: auto;
     display: block;
+    border-radius: 15px;
+
+    @include mixins.bp(md) {
+      width: 300px;
+    }
   }
 }
 
@@ -25,16 +36,35 @@
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
+
+  @include mixins.bp(md) {
+    align-items: flex-start;
+
+    p,
+    h2 {
+      text-align: left;
+    }
+  }
 }
 
 .title {
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: normal;
 }
 
 .description {
-  font-size: 1rem;
-  color: #d1d5db;
+  font-size: 0.8rem;
+  color: var(--lighter);
   text-align: center;
-  max-width: 90%;
+}
+
+@keyframes growIn {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+  100% {
+    max-height: 500px;
+    opacity: 1;
+  }
 }

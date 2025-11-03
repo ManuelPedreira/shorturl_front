@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import SockJS from "sockjs-client";
 import { Client, IMessage } from "@stomp/stompjs";
 
-// Ajusta la URL de tu backend Spring Boot
 const WS_URL = "http://localhost:8080/ws";
 
 type UrlUpdateMessage = {

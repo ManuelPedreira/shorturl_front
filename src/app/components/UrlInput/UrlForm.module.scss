@@ -1,8 +1,20 @@
+@use '../../../ui/_mixins.scss' as mixins;
+
 .input {
   flex-grow: 1;
   padding: 1rem 2rem;
   font-size: 1.2rem;
   transition: box-shadow 1s;
+
+  transition: all 0.2s linear;
+}
+
+.inputError {
+  outline-color: var(--error);
+
+  &:hover {
+    outline-color: var(--error);
+  }
 }
 
 .input_container {
@@ -11,7 +23,7 @@
   gap: 1rem;
   width: 100%;
 
-  @media (min-width: 600px) {
+  @include mixins.bp(md) {
     flex-direction: row;
   }
 }
@@ -33,7 +45,7 @@
   position: absolute;
   width: 1.4rem;
   height: 1.4rem;
-  border: 3px solid #fff;
+  border: 3px solid var(--lightest);
   border-top: 3px solid transparent;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -52,5 +64,5 @@
 
 .error {
   text-align: center;
-  color: #9c0000;
+  color: var(--error);
 }
