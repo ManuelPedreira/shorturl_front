@@ -1,4 +1,4 @@
-@use './_mixins.scss' as mixins;
+@use "./_mixins.scss" as mixins;
 
 :root {
   // https://kigen.design/color
@@ -24,32 +24,39 @@
 
   --error: #9c0000;
 
+  --percentage-width: 80%;
   --max-width: 1200px;
-}
-
-html,
-body {
-  padding: 0 1rem;
-  max-width: 100vw;
-  min-height: 100vh;
-
-  @include mixins.bp(md) {
-    padding: 0 2rem;
-  }
-}
-
-body {
-  color: var(--lightest);
-  background: var(--darkest);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --bar-height: 70px;
+  --footer-height: 50px;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+html {
+  background: linear-gradient(165deg, var(--middle), var(--darkest), var(--darker));
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--lightest);
+  min-height: 100vh;
+}
+
+main {
+  padding: calc(2rem + var(--bar-height)) 0 2rem 0;
+  min-height: calc(100vh - var(--footer-height));
+  display: flex;
+  width: var(--percentage-width);
+  max-width: var(--max-width);
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
 }
 
 input,
@@ -115,9 +122,4 @@ a {
 *:focus-visible,
 input:focus {
   outline: 1px solid var(--light);
-}
-
-body {
-  height: 100vh;
-  background: linear-gradient(165deg, var(--middle), var(--darkest), var(--darker));
 }

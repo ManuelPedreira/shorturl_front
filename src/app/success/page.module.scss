@@ -1,12 +1,5 @@
 @use '../../ui/_mixins.scss' as mixins;
 
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .container {
   display: flex;
   flex-direction: column;

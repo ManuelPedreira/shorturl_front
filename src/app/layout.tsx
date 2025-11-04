@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "../ui/globals.scss";
 import { geistMono, geistSans } from "@/ui/fonts";
+import Navbar from "@/ui/components/Navbar/Navbar";
+import { navbarElements } from "@/lib/pageConfig";
+import Footer from "@/ui/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Navbar elements={navbarElements} />
+        <main>{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

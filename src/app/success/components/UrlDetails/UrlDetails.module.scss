@@ -1,18 +1,21 @@
 @use "../../../../ui/_mixins.scss" as mixins;
 
 .details {
-  margin-top: 1.5rem;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
   transition: all 0.3s linear;
-
+  
   animation: growIn 0.3s ease-out forwards;
   overflow: hidden;
-
+  
   @include mixins.bp(md) {
     flex-direction: row;
+    padding-top: 2rem;
+    border-top: 1px solid var(--middle-dark);
+    gap: 3rem;
   }
 }
 

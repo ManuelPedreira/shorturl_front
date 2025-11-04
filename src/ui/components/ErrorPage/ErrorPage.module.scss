@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 100;
+  color: var(--lightest);
+}
+
+.message {
+  text-align: center;
+  text-wrap: balance;
+  font-size: 1.2rem;
+  color: var(--lighter);
+  
+  * {
+    margin:  0.5rem 0
+  }
+}
+
+.button {
+  margin: 2rem;
+}

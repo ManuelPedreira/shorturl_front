@@ -1,16 +1,17 @@
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
-  height: 70px;
-  background-color: #fff;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  height: var(--bar-height);
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(90, 78, 255, 0.2);
   z-index: 1;
 }
 
 .container {
-  width: 85%;
-  max-width: 1200px;
+  width: var(--percentage-width);
+  max-width: var(--max-width);
   display: flex;
   justify-content: space-between;
   align-items: center;

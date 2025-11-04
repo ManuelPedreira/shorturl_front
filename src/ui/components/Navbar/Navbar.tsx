@@ -1,17 +1,32 @@
+import Link from "next/link";
 import styles from "./Navbar.module.scss";
+import { NavigationElementType } from "@/lib/pageConfig";
+import LogoSVG from "@/ui/svg/LogoSVG/LogoSVG";
+import GithubSVG from "@/ui/svg/GithubSVG/GithubSVG";
 
-const Navbar = () => {
+type NavbarPropsType = {
+  elements: NavigationElementType[];
+};
+
+const Navbar = ({ elements }: NavbarPropsType) => {
   return (
     <header className={styles.navbar}>
       <div className={styles.container}>
-        <h1>logo</h1>
+        <Link href={"/"}>
+          <LogoSVG />
+        </Link>
         <nav>
           <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-            <li>Item 5</li>
+            {elements.map((pageLink) => (
+              <li key={pageLink.text}>
+                {pageLink.url ? <Link href={pageLink.url}>{pageLink.text}</Link> : pageLink.text}
+              </li>
+            ))}
+            <li>
+              <Link target="_blank" href={"https://github.com/ManuelPedreira"}>
+                <GithubSVG />
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
