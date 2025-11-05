@@ -10,12 +10,14 @@
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-
+  
   a {
+    transition: all 0.3s ease;
     color: var(--lighter);
 
     &:hover {
       color: var(--lightest);
+      filter: drop-shadow(0 0 10px var(--middle-light));
     }
   }
 }

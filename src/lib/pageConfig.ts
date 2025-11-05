@@ -4,5 +4,5 @@ export type NavigationElementType = {
 };
 
 export const navbarElements: NavigationElementType[] = [
-  { text: "Home", url: "/" }
+  { text: "Log In", url: "/" }
 ];

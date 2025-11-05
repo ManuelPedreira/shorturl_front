@@ -17,12 +17,23 @@
   text-wrap: balance;
   font-size: 1.2rem;
   color: var(--lighter);
-  
+
   * {
-    margin:  0.5rem 0
+    margin: 0.5rem 0;
   }
 }
 
-.button {
+.link {
+  border-radius: 15px;
   margin: 2rem;
+}
+
+.button {
+  font-size: 0.9rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 15px;
+
+  &:hover {
+    color: var(--lightest)
+  }
 }

@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import styles from "./page.module.scss";
 import { Suspense } from "react";
 import UrlDetails from "./components/UrlDetails/UrlDetails";
+import Link from "next/link";
 
 export default async function SuccessPage() {
   const cookieStore = await cookies();
@@ -30,6 +31,9 @@ export default async function SuccessPage() {
 
         <Suspense>{parsed?.shortCode ? <UrlDetails urlCode={parsed.shortCode} /> : null}</Suspense>
       </div>
+      <Link href={"/"} className={styles.link}>
+        <button className={styles.button}>Go Back</button>
+      </Link>
     </div>
   );
 }

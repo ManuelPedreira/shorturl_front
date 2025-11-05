@@ -35,7 +35,8 @@ export const useUrlUpdates = (shortCode: string) => {
       stompClient.subscribe(`/topic/url.${shortCode}`, (msg: IMessage) => {
         const data: UrlUpdateMessage = JSON.parse(msg.body);
         console.log("Message recibed:", data);
-        setMessage(data);
+
+        if (data.status === "done") setMessage(data);
 
         if (data.status === "done" || data.status === "error") {
           console.log("Closing connection...");

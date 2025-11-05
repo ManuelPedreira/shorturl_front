@@ -6,9 +6,9 @@ const ErrorPage = ({ children }: { children: React.ReactNode }) => {
     <div className={styles.container}>
       <h1 className={styles.title}>Something when wrong!</h1>
       <div className={styles.message}>{children}</div>
-      <button className={styles.button}>
-        <Link href={"/"}>Go Back</Link>
-      </button>
+      <Link href={"/"} className={styles.link}>
+        <button className={styles.button}>Go Back</button>
+      </Link>
     </div>
   );
 };

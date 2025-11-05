@@ -27,4 +27,24 @@
 
 .navbar nav li {
   list-style: none;
+
+  a {
+    color: var(--lighter);
+  }
+
+  a:hover {
+    color: var(--lightest);
+
+    path {
+      fill: var(--lightest);
+    }
+  }
+}
+
+.navbar a {
+  transition: all 0.3s ease;
+
+  &:hover {
+    filter: drop-shadow(0 0 5px var(--light));
+  }
 }
