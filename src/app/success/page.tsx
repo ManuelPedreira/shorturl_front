@@ -8,6 +8,7 @@ export default async function SuccessPage() {
   const cookieStore = await cookies();
   const data = cookieStore.get("shortUrlData");
   const parsed = data ? JSON.parse(data.value) : null;
+  const shortUrl = `${process.env.NEXT_PUBLIC_SERVER_HOST}/${parsed.shortCode}`
 
   return (
     <div className={styles.container}>
@@ -22,9 +23,9 @@ export default async function SuccessPage() {
           </div>
 
           <div>
-            <p className={styles.label}>Short URL:</p>
-            <a href={parsed.shortUrl} target="_blank" rel="noopener noreferrer">
-              {parsed.shortUrl}
+            <p className={styles.label}>Your Short URL:</p>
+            <a href={shortUrl} target="_blank" rel="noopener noreferrer">
+              {shortUrl}
             </a>
           </div>
         </div>
@@ -32,7 +33,7 @@ export default async function SuccessPage() {
         <Suspense>{parsed?.shortCode ? <UrlDetails urlCode={parsed.shortCode} /> : null}</Suspense>
       </div>
       <Link href={"/"} className={styles.link}>
-        <button className={styles.button}>Go Back</button>
+        <button className={styles.button}>Shorten another</button>
       </Link>
     </div>
   );
