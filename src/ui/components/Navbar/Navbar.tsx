@@ -19,7 +19,13 @@ const Navbar = ({ elements }: NavbarPropsType) => {
           <ul>
             {elements.map((pageLink) => (
               <li key={pageLink.text}>
-                {pageLink.url ? <Link href={pageLink.url}>{pageLink.text}</Link> : pageLink.text}
+                {pageLink.url ? (
+                  <Link href={pageLink.url} title="Not implemented yet!">
+                    {pageLink.text}
+                  </Link>
+                ) : (
+                  pageLink.text
+                )}
               </li>
             ))}
             <li>

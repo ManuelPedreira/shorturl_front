@@ -1,0 +1,15 @@
+.button {
+  cursor: pointer;
+  width: 2rem;
+  display: inline-block;
+  height: 20px;
+}
+
+.button path {
+  transition: all 0.3s ease;
+  stroke: var(--lighter);
+}
+
+.button:hover path {
+  stroke: var(--light);
+}

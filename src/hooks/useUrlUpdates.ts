@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import SockJS from "sockjs-client";
 import { Client, IMessage } from "@stomp/stompjs";
-import consoleLog from "@/lib/actions/consoleLog";
+//import consoleLog from "@/lib/actions/consoleLog";
 
-const WS_URL = `${process.env.NEXT_PUBLIC_SERVER_HOST}/ws` || "http://localhost:8080/ws";
+const WS_URL = `${process.env.NEXT_PUBLIC_SERVER_HOST}/ws`;
 
 type UrlUpdateMessage = {
   shortCode: string;
@@ -18,50 +18,44 @@ type UrlUpdateMessage = {
 
 export const useUrlUpdates = (shortCode: string) => {
   const [message, setMessage] = useState<UrlUpdateMessage | null>(null);
-  const [connected, setConnected] = useState(false);
-  const clientRef = useRef<Client | null>(null);
 
   useEffect(() => {
     const socket = new SockJS(WS_URL);
     const stompClient = new Client({
       webSocketFactory: () => socket,
-      reconnectDelay: 0, //
-      debug: (str) => consoleLog("[STOMP]", str),
+      reconnectDelay: 0,
+      //debug: (str) => consoleLog("[STOMP]", str),
     });
 
     stompClient.onConnect = async () => {
-      consoleLog("WebSocket connected....");
-      setConnected(true);
+      //consoleLog("WebSocket connected....");
 
       stompClient.subscribe(`/topic/url.${shortCode}`, (msg: IMessage) => {
         const data: UrlUpdateMessage = JSON.parse(msg.body);
-        consoleLog("Message recibed:", data);
+        //consoleLog("Message recibed:", data);
 
         if (data.status === "done") setMessage(data);
 
         if (data.status === "done" || data.status === "error") {
-          consoleLog("Closing connection...");
+          //consoleLog("Closing connection...");
           setTimeout(() => {
             stompClient.deactivate();
-            setConnected(false);
           }, 1000);
         }
       });
     };
 
     stompClient.onStompError = (frame) => {
-      consoleLog("Error STOMP:", frame);
+      //consoleLog("Error STOMP:", frame);
     };
 
     stompClient.activate();
-    clientRef.current = stompClient;
 
-    // Limpieza al desmontar
+    // close connection when component disarm
     return () => {
       stompClient.deactivate();
-      setConnected(false);
     };
   }, [shortCode]);
 
-  return { message, connected };
+  return { message };
 };
