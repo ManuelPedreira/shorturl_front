@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import SockJS from "sockjs-client";
 import { Client, IMessage } from "@stomp/stompjs";
+import consoleLog from "@/lib/actions/consoleLog";
 
-const WS_URL = "http://localhost:8080/ws";
+const WS_URL = `${process.env.NEXT_PUBLIC_SERVER_HOST}/ws` || "http://localhost:8080/ws";
 
 type UrlUpdateMessage = {
   shortCode: string;
@@ -25,21 +26,21 @@ export const useUrlUpdates = (shortCode: string) => {
     const stompClient = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 0, //
-      debug: (str) => console.log("[STOMP]", str),
+      debug: (str) => consoleLog("[STOMP]", str),
     });
 
     stompClient.onConnect = async () => {
-      console.log("WebSocket connected....");
+      consoleLog("WebSocket connected....");
       setConnected(true);
 
       stompClient.subscribe(`/topic/url.${shortCode}`, (msg: IMessage) => {
         const data: UrlUpdateMessage = JSON.parse(msg.body);
-        console.log("Message recibed:", data);
+        consoleLog("Message recibed:", data);
 
         if (data.status === "done") setMessage(data);
 
         if (data.status === "done" || data.status === "error") {
-          console.log("Closing connection...");
+          consoleLog("Closing connection...");
           setTimeout(() => {
             stompClient.deactivate();
             setConnected(false);
@@ -49,7 +50,7 @@ export const useUrlUpdates = (shortCode: string) => {
     };
 
     stompClient.onStompError = (frame) => {
-      console.error("Error STOMP:", frame);
+      consoleLog("Error STOMP:", frame);
     };
 
     stompClient.activate();
