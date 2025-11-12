@@ -1,7 +1,7 @@
 "use server";
 
-const consoleLog = (value: string, value2?: any) => {
-  console.log(value, value2);
+const consoleLog = (message?: any, ...optionalParams: any[]) => {
+  console.log(message, ...optionalParams);
 };
 
 export default consoleLog;
