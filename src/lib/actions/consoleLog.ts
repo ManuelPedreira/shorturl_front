@@ -1,4 +1,4 @@
-"use server";
+//"use server";
 
 const consoleLog = (message?: any, ...optionalParams: any[]) => {
   console.log(message, ...optionalParams);
