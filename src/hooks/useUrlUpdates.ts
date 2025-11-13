@@ -5,7 +5,9 @@ import SockJS from "sockjs-client";
 import { Client, IMessage } from "@stomp/stompjs";
 import consoleLog from "@/lib/actions/consoleLog";
 
-const serverHost = process.env.NEXT_PUBLIC_SERVER_HOST || window.location.origin;
+const serverHost = process.env.NEXT_PUBLIC_SERVER_HOST
+  ? process.env.NEXT_PUBLIC_SERVER_HOST
+  : window.location.origin;
 const WS_URL = `${serverHost}/ws`;
 
 type UrlUpdateMessage = {
