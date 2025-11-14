@@ -11,7 +11,7 @@ RUN npm install -g pnpm@9
 
 COPY package*.json pnpm-lock.yaml* ./
 
-RUN pnpm install --frozen-lockfile --prod
+RUN if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else pnpm install; fi
 
 COPY . .
 
