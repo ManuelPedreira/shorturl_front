@@ -1,8 +1,9 @@
 "use client";
 
-import ClipboardSVG from "@/ui/svg/ClipboardSVG/ClipboardSVG";
 import { useState } from "react";
 import styles from "./CopyButton.module.scss";
+import Clipboard from "@/assets/clipboard.svg";
+import ClipboardCheck from "@/assets/clipboard_check.svg";
 
 const CopyButton = ({ value }: { value: string }) => {
   const [copied, setCopied] = useState(false);
@@ -54,7 +55,11 @@ const CopyButton = ({ value }: { value: string }) => {
 
   return (
     <div className={styles.button} onClick={copyHandler}>
-      <ClipboardSVG check={copied} />
+      {copied ? (
+        <ClipboardCheck width="20px" height="20px" />
+      ) : (
+        <Clipboard width="20px" height="20px" />
+      )}
     </div>
   );
 };
