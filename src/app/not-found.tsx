@@ -1,13 +1,13 @@
-import ErrorPage from "@/ui/components/ErrorPage/ErrorPage";
+import ErrorContainer from "@/ui/ErrorContainer/ErrorContainer";
 
 export default function NotFound() {
   return (
-    <ErrorPage>
+    <ErrorContainer>
       <p>404 - Page Not Found</p>
       <small>
         The page you’re trying to access doesn’t exist or is unavailable. Please check the URL and
         try again.
       </small>
-    </ErrorPage>
+    </ErrorContainer>
   );
 }

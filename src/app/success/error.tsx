@@ -1,15 +1,15 @@
 "use client";
 
-import ErrorPage from "@/ui/components/ErrorPage/ErrorPage";
+import ErrorContainer from "@/ui/ErrorContainer/ErrorContainer";
 
 export default function SuccessError() {
   return (
-    <ErrorPage>
+    <ErrorContainer>
       <p>No Data Found</p>
       <small>
         The page loaded, but no data could be retrieved. Please verify your request or try again
         later.
       </small>
-    </ErrorPage>
+    </ErrorContainer>
   );
 }
