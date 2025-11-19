@@ -1,3 +1,5 @@
+@use "@/ui/_variables.scss" as var;
+
 .button {
   cursor: pointer;
   width: 2rem;
@@ -5,9 +7,9 @@
   height: 20px;
   transition: all 0.3s ease;
 
-  color: var(--lighter);
+  color: var.color(lighter);
 
   &:hover {
-    color: var(--light);
+    color: var.color(light);
   }
 }

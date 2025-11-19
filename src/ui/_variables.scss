@@ -1,0 +1,50 @@
+@use "sass:map";
+
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+);
+
+$blueColors: (
+  chetwode-blue-50: #d6e1f5,
+  chetwode-blue-100: #a6b8ea,
+  chetwode-blue-200: #7589df,
+  chetwode-blue-300: #4554d3,
+  chetwode-blue-400: #2a2db3,
+  chetwode-blue-500: #251f83,
+  chetwode-blue-600: #1d1353,
+  chetwode-blue-700: #0f0a29,
+  chetwode-blue-800: #000000,
+);
+
+$theme: $blueColors;
+
+$colors: (
+  darkest: map.get($theme, chetwode-blue-800),
+  darker: map.get($theme, chetwode-blue-700),
+  dark: map.get($theme, chetwode-blue-600),
+  middle-dark: map.get($theme, chetwode-blue-500),
+  middle: map.get($theme, chetwode-blue-400),
+  middle-light: map.get($theme, chetwode-blue-300),
+  light: map.get($theme, chetwode-blue-200),
+  lighter: map.get($theme, chetwode-blue-100),
+  lightest: map.get($theme, chetwode-blue-50),
+  
+  error: #9c0000,
+);
+
+$sizes: (
+  percentage-width: 80%,
+  max-width: 1200px,
+  navbar-height: 70px,
+  footer-height: 50px,
+);
+
+@function color($color-name) {
+  @return map.get($colors, $color-name);
+}
+
+@function size($size-name) {
+  @return map.get($sizes, $size-name);
+}

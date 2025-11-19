@@ -1,19 +1,9 @@
 @use "sass:map";
-
-$breakpoints: (
-  sm: 480px,
-  md: 768px,
-  lg: 1024px,
-);
-
-@function bp-value($key) {
-  @return map.get($breakpoints, $key);
-}
+@use "@/ui/_variables.scss" as variables;
 
 /* Mixin para media queries por nombre de breakpoint */
-@mixin bp($key) {
-  $val: bp-value($key);
-  @media (min-width: $val) {
+@mixin breakpoint($breakpoin-name) {
+  @media (min-width: map.get(variables.$breakpoints, $breakpoin-name)) {
     @content;
   }
 }

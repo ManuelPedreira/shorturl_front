@@ -1,8 +1,9 @@
+@use "@/ui/_variables.scss" as var;
 
 .container {
   display: flex;
   flex-direction: column;
-  max-width: var(--max-width);
+  max-width: var.size(max-width);
   width: 100%;
   gap: 4rem;
 }

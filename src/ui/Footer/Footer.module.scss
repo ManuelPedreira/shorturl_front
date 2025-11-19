@@ -1,23 +1,25 @@
+@use "@/ui/_variables.scss" as var;
+
 .footer {
   display: flex;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
   border-top: 1px solid rgba(90, 78, 255, 0.2);
-  color: var(--light);
-  height: var(--footer-height);
+  color: var.color(light);
+  height: var.size(footer-height);
 }
 
 .container {
-  max-width: var(--max-width);
+  max-width: var.size(max-width);
   margin: 0 auto;
   
   a {
     transition: all 0.3s ease;
-    color: var(--lighter);
+    color: var.color(lighter);
 
     &:hover {
-      color: var(--lightest);
-      filter: drop-shadow(0 0 10px var(--middle-light));
+      color: var.color(lightest);
+      filter: drop-shadow(0 0 10px var.color(middle-light));
     }
   }
 }
