@@ -1,63 +1,11 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import SockJS from "sockjs-client";
-import { Client, IMessage } from "@stomp/stompjs";
-import consoleLog from "@/lib/actions/consoleLog";
-
-const serverHost = process.env.NEXT_PUBLIC_SERVER_HOST
-  ? process.env.NEXT_PUBLIC_SERVER_HOST
-  : window.location.origin;
-const WS_URL = `${serverHost}/ws`;
-
-type UrlUpdateMessage = {
-  shortCode: string;
-  originalUrl: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  status: string;
-};
+import apiWebSocket, { UrlUpdateMessage } from "@/lib/api/apiWebSocket";
+import { useEffect, useState } from "react";
 
 export const useUrlUpdates = (shortCode: string) => {
   const [message, setMessage] = useState<UrlUpdateMessage | null>(null);
 
   useEffect(() => {
-    const socket = new SockJS(WS_URL);
-    const stompClient = new Client({
-      webSocketFactory: () => socket,
-      reconnectDelay: 0,
-      debug: (str) => consoleLog("[STOMP]", str),
-    });
-
-    stompClient.onConnect = async () => {
-      consoleLog("WebSocket connected....");
-
-      stompClient.subscribe(`/topic/url.${shortCode}`, (msg: IMessage) => {
-        const data: UrlUpdateMessage = JSON.parse(msg.body);
-        consoleLog("Message recibed:", data);
-
-        if (data.status === "done") setMessage(data);
-
-        if (data.status === "done" || data.status === "error") {
-          consoleLog("Closing connection...");
-          setTimeout(() => {
-            stompClient.deactivate();
-          }, 1000);
-        }
-      });
-    };
-
-    stompClient.onStompError = (frame) => {
-      consoleLog("Error STOMP:", frame);
-    };
-
-    stompClient.activate();
-
-    // close connection when component disarm
-    return () => {
-      stompClient.deactivate();
-    };
+    apiWebSocket({ shortCode, message, setMessage });
   }, [shortCode]);
 
   return { message };

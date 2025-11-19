@@ -1,8 +1,10 @@
+@use "@/ui/_variables.scss" as var;
+
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  height: var(--bar-height);
+  height: var.size(navbar-height);
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(90, 78, 255, 0.2);
@@ -10,8 +12,8 @@
 }
 
 .container {
-  width: var(--percentage-width);
-  max-width: var(--max-width);
+  width: var.size(percentage-width);
+  max-width: var.size(max-width);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,24 +29,14 @@
 
 .navbar nav li {
   list-style: none;
-
-  a {
-    color: var(--lighter);
-  }
-
-  a:hover {
-    color: var(--lightest);
-
-    path {
-      fill: var(--lightest);
-    }
-  }
 }
 
 .navbar a {
+  color: var.color(lighter);
   transition: all 0.3s ease;
 
   &:hover {
-    filter: drop-shadow(0 0 5px var(--light));
+    color: var.color(lightest);
+    filter: drop-shadow(0 0 5px var.color(light));
   }
 }

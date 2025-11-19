@@ -1,7 +1,7 @@
-import LoadingPage from "@/ui/components/LoadingPage/LoadingPage";
+import LoadingContainer from "@/ui/LoadingContainer/LoadingContainer";
 
 const GlobalLoading = () => {
-  return <LoadingPage />;
+  return <LoadingContainer />;
 };
 
 export default GlobalLoading;

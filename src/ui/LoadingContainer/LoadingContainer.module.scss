@@ -1,3 +1,5 @@
+@use "@/ui/_variables.scss" as var;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -11,7 +13,7 @@
   position: absolute;
   width: 3rem;
   height: 3rem;
-  border: 3px solid var(--lightest);
+  border: 3px solid var.color(lightest);
   border-top: 3px solid transparent;
   border-radius: 50%;
   animation: spin  0.8s linear infinite;

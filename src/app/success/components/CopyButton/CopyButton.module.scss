@@ -1,15 +1,15 @@
+@use "@/ui/_variables.scss" as var;
+
 .button {
   cursor: pointer;
   width: 2rem;
   display: inline-block;
   height: 20px;
-}
-
-.button path {
   transition: all 0.3s ease;
-  stroke: var(--lighter);
-}
 
-.button:hover path {
-  stroke: var(--light);
+  color: var.color(lighter);
+
+  &:hover {
+    color: var.color(light);
+  }
 }

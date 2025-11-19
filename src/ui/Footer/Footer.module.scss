@@ -1,0 +1,25 @@
+@use "@/ui/_variables.scss" as var;
+
+.footer {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(90, 78, 255, 0.2);
+  color: var.color(light);
+  height: var.size(footer-height);
+}
+
+.container {
+  max-width: var.size(max-width);
+  margin: 0 auto;
+  
+  a {
+    transition: all 0.3s ease;
+    color: var.color(lighter);
+
+    &:hover {
+      color: var.color(lightest);
+      filter: drop-shadow(0 0 10px var.color(middle-light));
+    }
+  }
+}
