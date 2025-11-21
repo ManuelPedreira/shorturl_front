@@ -2,6 +2,10 @@
 
 Frontend for a URL shortener built on Next.js App Router. Users drop a URL, the app fires a Server Action (POST) to create the short link, and then keeps a WebSocket/STOMP feed open to surface scraped metadata the moment the backend finishes.
 
+## Repositories
+- Frontend (`shorturl_front`): https://github.com/ManuelPedreira/shorturl_front
+- Backend (`shorturl_back`): https://github.com/ManuelPedreira/shorturl_back
+
 ## System Overview
 - Frontend and backend run behind a shared Nginx reverse proxy that enforces rate limits and routes traffic to the proper upstream.
 - UI is a Next.js App Router project (`shorturl_front`).
@@ -10,7 +14,7 @@ Frontend for a URL shortener built on Next.js App Router. Users drop a URL, the 
   - `/` and `/success` to the frontend.
   - `/api`, `/ws`, and short-code slugs like `/abc1234` to the backend with WebSocket upgrade headers.
 
-## Highlights
+## Features
 - Axios client targeting `POST /api`.
 - SockJS + `@stomp/stompjs` for `/topic/url.{shortCode}` updates.
 - Short-lived JWT cookies to authorize WebSocket access.

@@ -10,7 +10,7 @@ export default async function SuccessPage() {
   const data = cookieStore.get("shortUrlData");
   const parsed = data ? JSON.parse(data.value) : null;
 
-  const shortUrl = parsed?.shortUrl;
+  const shortUrl = parsed.shortUrl;
   const originalUrl = parsed?.originalUrl;
   const shortCode = parsed?.shortCode;
 
