@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ShortURL Frontend
+
+Frontend for a URL shortener built on Next.js App Router. Users drop a URL, the app fires a Server Action (POST) to create the short link, and then keeps a WebSocket/STOMP feed open to surface scraped metadata the moment the backend finishes.
+
+## System Overview
+- Frontend and backend run behind a shared Nginx reverse proxy that enforces rate limits and routes traffic to the proper upstream.
+- UI is a Next.js App Router project (`shorturl_front`).
+- Backend (`shorturl_back`) is a Spring service that exposes REST + STOMP endpoints.
+- Nginx (listening on `:80`) forwards:
+  - `/` and `/success` to the frontend.
+  - `/api`, `/ws`, and short-code slugs like `/abc1234` to the backend with WebSocket upgrade headers.
+
+## Highlights
+- Axios client targeting `POST /api`.
+- SockJS + `@stomp/stompjs` for `/topic/url.{shortCode}` updates.
+- Short-lived JWT cookies to authorize WebSocket access.
+- Zod validation that normalizes URLs and surfaces precise errors.
+- SCSS modules, shared UI (Navbar, Footer, loaders).
+- Server Action (`createNewUrl`) wrapped in `useActionState` for instant feedback.
 
 ## Getting Started
 
-First, run the development server:
-
+### Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
+```bash
+# Default HTTP dev server (http://localhost:3000)
+npm run dev
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# HTTPS dev server (uses Next experimental HTTPS)
+npm run dev-https
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Production build
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Environment Variables
+Create a `.env` file with:
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Description |
+| --- | --- |
+| `SERVER_HOST` | Base URL of the backend REST API (e.g. `https://api.example.com`). Useful when running behind a reverse proxy. |
+| `NEXT_PUBLIC_SERVER_HOST` | Public host used in the UI to build the final short URL and WebSocket endpoint. Usually the same as the backend host. |
+| `JWT_WS_SECRET` | Secret used in `createNewUrl` to sign the temporary `WSAccess` cookie that authorizes the WebSocket session. |
+| `TEMPORAL_COOKIE_EXPIRATION_TIME` | (Optional) Cookie lifetime in seconds for `WSAccess` and `shortUrlData`. Defaults to 10 seconds. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Backend expectations:
+- `POST /api` returns `{ shortCode, originalUrl, shortUrl }`.
+- SockJS/STOMP endpoint `${NEXT_PUBLIC_SERVER_HOST}/ws` pushes scraping payloads to `/topic/url.{shortCode}`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Roadmap
+- Authentication, dashboards, and user panel
+- Telemetry reports and filters
+- Custom url codes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tech Stack
+- **Framework**: Next.js 16 (App Router) with React 19 Server/Client Components.
+- **Styles**: Global SCSS + CSS Modules, custom fonts via `next/font`.
+- **Networking**: Axios for REST calls, SockJS + `@stomp/stompjs` for WebSocket 
+subscriptions.
+- **State & Validation**: `useActionState`, Suspense, and Zod schemas for form 
+validation.
+- **Security**: `jose` to mint short-lived JWT cookies (`WSAccess`) that gate 
+WebSocket access.
