@@ -46,7 +46,7 @@ Create a `.env` file with:
 | Variable | Description |
 | --- | --- |
 | `SERVER_HOST` | Base URL of the backend REST API (e.g. `https://api.example.com`). Useful when running behind a reverse proxy. |
-| `NEXT_PUBLIC_SERVER_HOST` | Public host used in the UI to build the final short URL and WebSocket endpoint. Usually the same as the backend host. |
+| `NEXT_PUBLIC_SERVER_HOST` | Public host used in the WebSocket endpoint. Usually the same as the backend host. |
 | `JWT_WS_SECRET` | Secret used in `createNewUrl` to sign the temporary `WSAccess` cookie that authorizes the WebSocket session. |
 | `TEMPORAL_COOKIE_EXPIRATION_TIME` | (Optional) Cookie lifetime in seconds for `WSAccess` and `shortUrlData`. Defaults to 10 seconds. |
 
