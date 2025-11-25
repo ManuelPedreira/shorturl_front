@@ -11,9 +11,7 @@ const UrlDetails = ({ urlCode }: { urlCode: string }) => {
   return (
     <div className={styles.details}>
       {message?.imageUrl && (
-        <div className={styles.thumbnail}>
-          <img src={message.imageUrl} alt="preview" />
-        </div>
+        <img className={styles.thumbnail} src={message.imageUrl} alt="preview" />
       )}
 
       <div className={styles.info}>

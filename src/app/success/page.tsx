@@ -16,30 +16,27 @@ export default async function SuccessPage() {
 
   return (
     <div className={styles.container}>
-      <h1>Your Short URL</h1>
+      <h1>Everything Ready!</h1>
       <div className={styles.card}>
         <div className={styles.url_container}>
-          <div>
-            <div className={styles.label}>Original URL:</div>
-            <a href={originalUrl} target="_blank" rel="noopener noreferrer">
-              {originalUrl}{" "}
-            </a>
+          <div className={styles.label}>
+            Your Short URL
+            <CopyButton value={shortUrl} />
           </div>
-
-          <div>
-            <div className={styles.label}>
-              Your Short URL:
-              <CopyButton value={shortUrl} />
-            </div>
-            <a href={shortUrl} target="_blank" rel="noopener noreferrer">
-              {shortUrl}
-            </a>
-          </div>
+          <a href={shortUrl} target="_blank" rel="noopener noreferrer">
+            {shortUrl}
+          </a>
         </div>
 
         <Suspense>{shortCode ? <UrlDetails urlCode={shortCode} /> : null}</Suspense>
+        <div className={styles.original_url}>
+          Original URL:{" "}
+          <a href={originalUrl} target="_blank" rel="noopener noreferrer">
+            {originalUrl}
+          </a>
+        </div>
       </div>
-      <Link href={"/"} className={styles.link}>
+      <Link href={"/"} className={styles.button_link}>
         <button className={styles.button}>Shorten another</button>
       </Link>
     </div>
