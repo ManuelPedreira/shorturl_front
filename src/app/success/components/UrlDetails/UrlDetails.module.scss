@@ -21,12 +21,16 @@
 }
 
 .thumbnail {
-  max-width: 300px;
+  max-width: 100%;
   max-height: 200px;
   width: auto;
   height: auto;
   object-fit: contain;
   border-radius: 15px;
+
+  @include mixins.breakpoint(sm) {
+    max-width: 300px;
+  }
 }
 
 .info {
