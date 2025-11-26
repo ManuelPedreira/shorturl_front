@@ -26,33 +26,38 @@
   gap: 2rem;
   text-wrap: balance;
   padding-bottom: 0.5rem;
-}
 
-.label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  height: 2.2rem;
-  color: var.color(lighter);
+  .label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    height: 2.2rem;
+    color: var.color(lighter);
 
-  @include mixins.breakpoint(sm) {
+    @include mixins.breakpoint(sm) {
+      font-size: 1rem;
+    }
+  }
+
+  a {
     font-size: 1rem;
+
+    @include mixins.breakpoint(sm) {
+      font-size: 1.2rem;
+    }
+
+    @include mixins.breakpoint(md) {
+      font-size: 1.4rem;
+    }
   }
 }
 
-.url_container_a {
-  font-size: 1rem;
-
-  @include mixins.breakpoint(sm) {
-    font-size: 1.2rem;
-  }
-
-  @include mixins.breakpoint(md) {
-    font-size: 1.4rem;
-  }
+@mixin font-original-url() {
+  font-size: 0.8rem;
+  color: var.color(lighter);
 }
 
 .original_url {
@@ -64,16 +69,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  font-size: 0.8rem;
-  color: var.color(lighter);
-}
+  @include font-original-url();
 
-.original_url_a {
-  font-size: 0.8rem;
-  color: var.color(lighter);
+  a {
+    @include font-original-url();
 
-  &:hover {
-    color: var.color(light);
+    &:hover {
+      color: var.color(light);
+    }
   }
 }
 
@@ -83,14 +86,15 @@
   @include mixins.breakpoint(md) {
     align-self: flex-end;
   }
-}
-
-.button {
-  font-size: 0.9rem;
-  width: 100%;
-  padding: 0.75rem 1.5rem;
-
-  &:hover {
-    color: var.color(lightest);
+  
+  .button {
+    font-size: 0.9rem;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+  
+    &:hover {
+      color: var.color(lightest);
+    }
   }
 }
+
