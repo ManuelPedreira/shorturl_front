@@ -44,6 +44,15 @@ npm run build
 npm start
 ```
 
+### Testing
+```bash
+# Single run
+npm test
+
+# Watch mode
+npm run test:watch
+```
+
 ## Environment Variables
 Create a `.env` file with:
 
