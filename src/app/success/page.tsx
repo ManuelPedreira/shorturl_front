@@ -23,7 +23,7 @@ export default async function SuccessPage() {
             Your Short URL
             <CopyButton value={shortUrl} />
           </div>
-          <a href={shortUrl} target="_blank" rel="noopener noreferrer">
+          <a href={shortUrl} className={styles.url_container_a} target="_blank" rel="noopener noreferrer">
             {shortUrl}
           </a>
         </div>
@@ -31,7 +31,7 @@ export default async function SuccessPage() {
         <Suspense>{shortCode ? <UrlDetails urlCode={shortCode} /> : null}</Suspense>
         <div className={styles.original_url}>
           Original URL:{" "}
-          <a href={originalUrl} target="_blank" rel="noopener noreferrer">
+          <a href={originalUrl} className={styles.original_url_a} target="_blank" rel="noopener noreferrer">
             {originalUrl}
           </a>
         </div>

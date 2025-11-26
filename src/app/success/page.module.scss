@@ -26,18 +26,6 @@
   gap: 2rem;
   text-wrap: balance;
   padding-bottom: 0.5rem;
-
-  a {
-    font-size: 1rem;
-
-    @include mixins.breakpoint(sm) {
-      font-size: 1.2rem;
-    }
-    
-    @include mixins.breakpoint(md) {
-      font-size: 1.4rem;
-    }
-  }
 }
 
 .label {
@@ -55,9 +43,16 @@
   }
 }
 
-@mixin font-original-url() {
-  font-size: 0.8rem;
-  color: var.color(lighter);
+.url_container_a {
+  font-size: 1rem;
+
+  @include mixins.breakpoint(sm) {
+    font-size: 1.2rem;
+  }
+
+  @include mixins.breakpoint(md) {
+    font-size: 1.4rem;
+  }
 }
 
 .original_url {
@@ -69,14 +64,16 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  @include font-original-url();
+  font-size: 0.8rem;
+  color: var.color(lighter);
+}
 
-  a {
-    @include font-original-url();
+.original_url_a {
+  font-size: 0.8rem;
+  color: var.color(lighter);
 
-    &:hover {
-      color: var.color(light);
-    }
+  &:hover {
+    color: var.color(light);
   }
 }
 
