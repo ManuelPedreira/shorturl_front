@@ -1,8 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import UrlForm from "../UrlForm";
+import UrlForm from "../components/UrlInput/UrlForm";
 import React from "react";
-
-jest.mock("@/lib/actions/createNewUrl", () => jest.fn());
 
 jest.mock("react", () => ({
   ...jest.requireActual("react"),
@@ -17,10 +15,6 @@ describe("UrlForm", () => {
   beforeEach(() => {
     mockFormAction = jest.fn();
     mockUseActionState.mockReturnValue([null, mockFormAction, false]);
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
   });
 
   it("renders the url placeholder", () => {
