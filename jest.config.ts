@@ -1,11 +1,7 @@
 import type { Config } from "jest";
 import nextJest from "next/jest.js";
 
-const createJestConfig = nextJest({
-  dir: "./",
-});
-
-const config: Config = {
+const customJestConfig: Config = {
   coverageProvider: "v8",
   collectCoverage: true,
   coverageDirectory: "coverage",
@@ -18,5 +14,20 @@ const config: Config = {
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
 };
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-export default createJestConfig(config);
+const createJestConfig = nextJest({
+  dir: "./",
+});
+
+const jestConfig = async () => {
+  const nextJestConfig = await createJestConfig(customJestConfig)();
+  return {
+    ...nextJestConfig,
+    moduleNameMapper: {
+      // Workaround to put our SVG mock first
+      "\\.svg$": "<rootDir>/__mocks__/svg.tsx",
+      ...nextJestConfig.moduleNameMapper,
+    },
+  };
+};
+
+export default jestConfig;

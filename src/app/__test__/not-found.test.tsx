@@ -1,16 +1,16 @@
+import NotFound from "@/app/not-found";
 import { render, screen } from "@testing-library/react";
-import SuccessError from "../error";
 
 jest.mock("@/ui/ErrorContainer/ErrorContainer", () => () => (
   <div data-testid="error-container"></div>
 ));
 
-describe("SuccessError", () => {
+describe("NotFound", () => {
   it("renders the error page", () => {
-    render(<SuccessError />);
+    render(<NotFound />);
 
     const container = screen.getByTestId("error-container");
-    
+
     expect(container).toBeInTheDocument();
   });
 });

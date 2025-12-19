@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { cookies } from "next/headers";
 import SuccessPage from "../page";
 
@@ -33,14 +33,17 @@ describe("SuccessPage", () => {
     setMockCookieValues(validCookieValues);
     render(await SuccessPage());
 
-    const text = screen.getByText(validCookieValues.originalUrl);
+    const shortUrl = screen.getByRole("link", { name: validCookieValues.shortUrl });
+    const originalUrl = screen.getByText(validCookieValues.originalUrl);
 
-    expect(text).toBeInTheDocument();
+    expect(shortUrl).toBeInTheDocument();
+    expect(originalUrl).toBeInTheDocument();
   });
 
   it("renders the UrlDetails with values", async () => {
     setMockCookieValues(validCookieValues);
     render(await SuccessPage());
+
     const component = screen.getByTestId("url-details");
 
     expect(component).toBeInTheDocument();
@@ -50,6 +53,7 @@ describe("SuccessPage", () => {
   it("renders the CopyButton with values", async () => {
     setMockCookieValues(validCookieValues);
     render(await SuccessPage());
+
     const component = screen.getByTestId("copy-button");
 
     expect(component).toBeInTheDocument();
