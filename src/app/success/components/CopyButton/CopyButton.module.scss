@@ -1,15 +1,25 @@
 @use "@/ui/_variables.scss" as var;
 
 .button {
-  cursor: pointer;
-  width: 2rem;
-  display: inline-block;
-  height: 20px;
-  transition: all 0.3s ease;
+  border-radius: 5px;
+  padding: 2px 2px 0px 2px;
+  margin: 0 0.5rem;
 
+  transition: all 0.3s ease;
   color: var.color(lighter);
 
   &:hover {
     color: var.color(light);
+  } 
+
+  &:focus {
+    outline: 1px solid var.color(lighter);
   }
+}
+
+
+.button, button:hover {
+  outline: none;
+  box-shadow: none;
+  background: transparent;
 }
