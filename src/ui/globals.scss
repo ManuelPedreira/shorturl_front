@@ -8,7 +8,12 @@
 
 html {
   background-color: var.color(darker);
-  background-image: linear-gradient(165deg, var.color(middle), var.color(darkest), var.color(darker));
+  background-image: linear-gradient(
+    165deg,
+    var.color(middle),
+    var.color(darkest),
+    var.color(darker)
+  );
 }
 
 body {
@@ -30,57 +35,8 @@ main {
   margin: 0 auto;
 }
 
-input,
-button {
-  background-color: transparent;
-  border: 0;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  color: var.color(lighter);
-  box-shadow: 0 0 35px 20px var.color(dark);
-  background-color: var.color(dark);
-  outline: 1px solid var.color(middle);
-  transition: all 0.3s;
-}
-
-button {
-  color: var.color(lighter);
-  background-color: var.color(middle-dark);
-}
-
-button:hover {
-  outline: 1px solid var.color(middle-light);
-  cursor: pointer;
-}
-
-input:hover,
-button:hover {
-  box-shadow: 0 0 30px 5px var.color(middle);
-  outline: 1px solid var.color(middle-light);
-}
-
-button:active,
-button:target {
-  outline: 1px solid var.color(light);
-  box-shadow: 0 0 30px 5px var.color(middle-light);
-  background-color: var.color(middle-light);
-  color: var.color(lighterst);
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-  box-shadow: none;
-
-  &:active {
-    color: var.color(lighter);
-    background-color: var.color(middle-dark);
-  }
-}
-
 a {
   text-decoration: none;
-  font-size: 1rem;
   word-break: break-all;
   color: var.color(lightest);
   transition: color 0.2s ease;
@@ -90,7 +46,6 @@ a {
   }
 }
 
-*:focus-visible,
-input:focus {
+*:focus-visible {
   outline: 1px solid var.color(light);
 }
