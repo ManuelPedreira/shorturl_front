@@ -18,7 +18,7 @@ const UrlForm = () => {
     <form action={formAction}>
       <div className={styles.input_container}>
         <input
-          className={`${styles.input} ${isError ? styles.inputError : ""}`}
+          className={`${styles.input} ${isError ? styles.input_error : ""}`}
           name="url"
           aria-label="short-url-input"
           placeholder="http://"
@@ -26,7 +26,7 @@ const UrlForm = () => {
         />
         <button className={styles.button} type="submit" aria-label="submit-button" disabled={pending || isError}>
           {pending ? <span className={styles.spinner} /> : null}
-          <span className={pending ? styles.buttonHideText : ""}>Shorten!</span>
+          <span className={pending ? styles.button_hide_text : ""}>Shorten!</span>
         </button>
       </div>
       <div className={styles.error_container}>

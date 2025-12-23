@@ -1,4 +1,5 @@
 @use "@/ui/_variables.scss" as var;
+@use "@/ui/_basics.scss" as basics;
 
 .container {
   display: flex;
@@ -32,11 +33,5 @@
 }
 
 .button {
-  font-size: 0.9rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 15px;
-
-  &:hover {
-    color: var.color(lightest)
-  }
+  @include basics.button;
 }
