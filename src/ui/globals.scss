@@ -47,5 +47,6 @@ a {
 }
 
 *:focus-visible {
-  outline: 1px solid var.color(light);
+  border-radius: 5px;
+  outline: 1px solid var.color(light) !important;
 }
