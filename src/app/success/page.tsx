@@ -36,7 +36,7 @@ export default async function SuccessPage() {
           </a>
         </div>
       </div>
-      <Link href={"/"} className={styles.button_link}>
+      <Link href={"/"} className={styles.button_link} aria-label="go-back-link">
         <button className={styles.button}>Shorten another</button>
       </Link>
     </div>

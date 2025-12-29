@@ -12,24 +12,22 @@ const Navbar = ({ elements }: NavbarPropsType) => {
   return (
     <header className={styles.navbar}>
       <div className={styles.container}>
-        <Link href={"/"}>
+        <Link href={"/"} aria-label="home-logo" >
           <Logo with="50px" height="50px" />
         </Link>
         <nav>
           <ul>
             {elements.map((pageLink) => (
               <li key={pageLink.text}>
-                {pageLink.url ? (
-                  <Link href={pageLink.url} title="Not implemented yet!">
+                {
+                  <Link href={pageLink.url} title={pageLink.title}>
                     {pageLink.text}
                   </Link>
-                ) : (
-                  pageLink.text
-                )}
+                }
               </li>
             ))}
             <li>
-              <Link target="_blank" href={"https://github.com/ManuelPedreira"}>
+              <Link aria-label="github-link" target="_blank" href={"https://github.com/ManuelPedreira"}>
                 <GithubLogo with="35px" height="35px" />
               </Link>
             </li>
