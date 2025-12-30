@@ -18,7 +18,9 @@ const validValue = {
     status: "done",
   },
 };
-const getTitle = () => screen.queryByRole("heading");
+const getTitle = () => screen.queryByText(validValue.message.title);
+const getDescription = () => screen.queryByText(validValue.message.description);
+const getImage = () => screen.queryByAltText("preview");
 
 describe("Render UrlDetails", () => {
   beforeEach(() => {
@@ -30,16 +32,24 @@ describe("Render UrlDetails", () => {
     render(<UrlDetails urlCode="" />);
 
     const title = getTitle();
-
+    const description = getDescription();
+    const image = getImage();
+    
     expect(title).toBeInTheDocument();
+    expect(description).toBeInTheDocument();
+    expect(image).toHaveAttribute("src", validValue.message.imageUrl);
   });
-
+  
   it("doesn't render when message is null", () => {
     mockedUseUrlUpdates.mockReturnValue(emptyValue);
     render(<UrlDetails urlCode="" />);
-
+    
     const title = getTitle();
-
+    const description = getDescription();
+    const image = getImage();
+    
     expect(title).not.toBeInTheDocument();
+    expect(description).not.toBeInTheDocument();
+    expect(image).not.toBeInTheDocument();
   });
 });
