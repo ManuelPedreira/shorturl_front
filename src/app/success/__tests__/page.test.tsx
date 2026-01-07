@@ -59,4 +59,13 @@ describe("SuccessPage", () => {
     expect(component).toBeInTheDocument();
     expect(component).toHaveTextContent(validCookieValues.shortUrl);
   });
+
+  it("links back to home", async () => {
+    setMockCookieValues(validCookieValues);
+    render(await SuccessPage());
+
+    const link = screen.getByLabelText("go-back-link");
+
+    expect(link).toHaveAttribute("href", "/");
+  });
 });

@@ -6,8 +6,8 @@ const ErrorContainer = ({ children }: { children: React.ReactNode }) => {
     <div className={styles.container}>
       <h1 className={styles.title}>Something when wrong!</h1>
       <div className={styles.message}>{children}</div>
-      <Link href={"/"} className={styles.link}>
-        <button className={styles.button}>Go Back</button>
+      <Link href={"/"} className={styles.link} aria-label="go-back-link">
+        <button className={styles.button} aria-label="go-back-button">Go Back</button>
       </Link>
     </div>
   );
