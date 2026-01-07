@@ -8,6 +8,8 @@ jest.mock("react", () => ({
   useActionState: jest.fn(),
 }));
 
+jest.mock("@/lib/actions/createNewUrl", () => jest.fn());
+
 const mockUseActionState = React.useActionState as jest.MockedFunction<typeof React.useActionState>;
 
 const getUrlInput = () => screen.getByLabelText("short-url-input");

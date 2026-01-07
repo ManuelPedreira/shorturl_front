@@ -10,6 +10,10 @@ jest.mock("@/lib/api/apiWebSocket", () => ({
 const mockApiWebSocket = apiWebSocket as jest.MockedFunction<typeof apiWebSocket>;
 
 describe("useUrlUpdates", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should initialize with null message", () => {
     const { result } = renderHook(() => useUrlUpdates("abc123"));
 
@@ -28,10 +32,9 @@ describe("useUrlUpdates", () => {
   });
 
   it("should call apiWebSocket when shortCode changes", () => {
-    const { rerender } = renderHook(
-      ({ shortCode }) => useUrlUpdates(shortCode),
-      { initialProps: { shortCode: "code1" } }
-    );
+    const { rerender } = renderHook(({ shortCode }) => useUrlUpdates(shortCode), {
+      initialProps: { shortCode: "code1" },
+    });
 
     expect(mockApiWebSocket).toHaveBeenCalledTimes(1);
 
