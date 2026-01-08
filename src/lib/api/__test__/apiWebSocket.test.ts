@@ -40,19 +40,18 @@ describe("apiWebSocket", () => {
   });
 
   it("subscribes and sets message when status is done and closes the transmission", () => {
-    const setMessage = jest.fn();
+    const onMessageReceived = jest.fn();
 
     apiWebSocket({
       shortCode,
-      message: null,
-      setMessage,
+      onMessageReceived,
     });
 
     subscribeCallback({
       body: JSON.stringify(wsMessage),
     });
 
-    expect(setMessage).toHaveBeenCalledWith(wsMessage);
+    expect(onMessageReceived).toHaveBeenCalledWith(wsMessage);
     expect(subscribedTopic).toBe(`/topic/url.${shortCode}`);
     expect(mockDeactivate).toHaveBeenCalled();
   });

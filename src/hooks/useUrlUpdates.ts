@@ -5,7 +5,7 @@ export const useUrlUpdates = (shortCode: string) => {
   const [message, setMessage] = useState<UrlUpdateMessage | null>(null);
 
   useEffect(() => {
-    apiWebSocket({ shortCode, message, setMessage });
+    apiWebSocket({ shortCode, onMessageReceived: (message) => setMessage(message) });
   }, [shortCode]);
 
   return { message };

@@ -20,11 +20,10 @@ export type UrlUpdateMessage = {
 
 type apiWebSocketProps = {
   shortCode: string;
-  message: UrlUpdateMessage | null;
-  setMessage: Dispatch<SetStateAction<UrlUpdateMessage | null>>;
+  onMessageReceived: (message: UrlUpdateMessage) => void;
 };
 
-const apiWebSocket = ({ shortCode, message, setMessage }: apiWebSocketProps) => {
+const apiWebSocket = ({ shortCode, onMessageReceived }: apiWebSocketProps) => {
   const socket = new SockJS(WS_URL);
   const stompClient = new Client({
     webSocketFactory: () => socket,
@@ -39,7 +38,7 @@ const apiWebSocket = ({ shortCode, message, setMessage }: apiWebSocketProps) => 
       const data: UrlUpdateMessage = JSON.parse(msg.body);
       console.log("Message recibed:", data);
 
-      if (data.status === "done") setMessage(data);
+      if (data.status === "done") onMessageReceived(data);
 
       if (data.status === "done" || data.status === "error") {
         console.log("Closing connection...");

@@ -37,9 +37,19 @@ describe("useUrlUpdates", () => {
     });
 
     expect(mockApiWebSocket).toHaveBeenCalledTimes(1);
+    expect(mockApiWebSocket).toHaveBeenCalledWith(
+      expect.objectContaining({
+        shortCode: "code1",
+      })
+    );
 
     rerender({ shortCode: "code2" });
 
     expect(mockApiWebSocket).toHaveBeenCalledTimes(2);
+    expect(mockApiWebSocket).toHaveBeenCalledWith(
+      expect.objectContaining({
+        shortCode: "code2",
+      })
+    );
   });
 });
