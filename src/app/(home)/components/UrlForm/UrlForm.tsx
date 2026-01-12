@@ -4,7 +4,7 @@ import createNewUrl from "@/lib/actions/createNewUrl";
 import styles from "./UrlForm.module.scss";
 import { useActionState, useEffect, useState } from "react";
 
-const UrlForm = () => {
+const UrlForm = ({ submitText }: { submitText: string }) => {
   const [state, formAction, pending] = useActionState(createNewUrl, null);
   const [isError, setIsError] = useState(false);
 
@@ -24,9 +24,14 @@ const UrlForm = () => {
           placeholder="http://"
           onChange={() => setIsError(false)}
         />
-        <button className={styles.button} type="submit" aria-label="submit-button" disabled={pending || isError}>
+        <button
+          className={styles.button}
+          type="submit"
+          aria-label="submit-button"
+          disabled={pending || isError}
+        >
           {pending ? <span className={styles.spinner} /> : null}
-          <span className={pending ? styles.button_hide_text : ""}>Shorten!</span>
+          <span className={pending ? styles.button_hide_text : ""}>{submitText}</span>
         </button>
       </div>
       <div className={styles.error_container}>

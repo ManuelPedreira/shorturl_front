@@ -4,8 +4,10 @@ import { Suspense } from "react";
 import UrlDetails from "./components/UrlDetails/UrlDetails";
 import Link from "next/link";
 import CopyButton from "./components/CopyButton/CopyButton";
+import { getTranslations } from "next-intl/server";
 
 export default async function SuccessPage() {
+  const t = await getTranslations("SuccessPage");
   const cookieStore = await cookies();
   const data = cookieStore.get("shortUrlData");
   const parsed = data ? JSON.parse(data.value) : null;
@@ -16,11 +18,11 @@ export default async function SuccessPage() {
 
   return (
     <div className={styles.container}>
-      <h1>Everything Ready!</h1>
+      <h1>{t("title")}</h1>
       <div className={styles.card}>
         <div className={styles.url_container}>
           <div className={styles.label}>
-            Your Short URL
+            {t("short_url_title")}
             <CopyButton value={shortUrl} />
           </div>
           <a href={shortUrl} target="_blank" rel="noopener noreferrer">
@@ -30,14 +32,14 @@ export default async function SuccessPage() {
 
         <Suspense>{shortCode ? <UrlDetails urlCode={shortCode} /> : null}</Suspense>
         <div className={styles.original_url}>
-          Original URL:{" "}
+          {`${t("original_url_title")}: `}
           <a href={originalUrl} target="_blank" rel="noopener noreferrer">
             {originalUrl}
           </a>
         </div>
       </div>
       <Link href={"/"} className={styles.button_link} aria-label="go-back-link">
-        <button className={styles.button}>Shorten another</button>
+        <button className={styles.button}>{t("back_button")}</button>
       </Link>
     </div>
   );

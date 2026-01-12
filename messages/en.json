@@ -1,0 +1,31 @@
+{
+  "Layout": {
+    "title": "Short URL",
+    "description": "Shourt your URL | Proyect created by Manuel Pedreira"
+  },
+  "NavbarElements": {
+    "login": "Log In",
+    "loginTitle": "Not implemented yet!"
+  },
+  "Footer": {
+    "developed_by": "Developed by <author>Manuel Pedreira</author>"
+  },
+  "Home": {
+    "title": "Short URL",
+    "submit_button": "Shorten!"
+  },
+  "SuccessPage": {
+    "title": "Everything Ready!",
+    "short_url_title": "Your Short URL",
+    "original_url_title": "Original URL",
+    "back_button": "Shorten another!"
+  },
+  "ErrorPages": {
+    "general_title": "Something when wrong!",
+    "general_back_button": "Go Back",
+    "not_found_error_title": "404 - Page Not Found",
+    "not_found_error_text": "The page you’re trying to access doesn’t exist or is unavailable. Please check the URL and try again.",
+    "success_error_title": "No Data Found",
+    "success_error_text": "The page loaded, but no data could be retrieved. Please verify your request or try again later."
+  }
+}
