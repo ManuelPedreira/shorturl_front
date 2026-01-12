@@ -2,24 +2,33 @@ import type { Metadata } from "next";
 import "../ui/globals.scss";
 import { geistMono, geistSans } from "@/ui/fonts";
 import Navbar from "@/ui/Navbar/Navbar";
-import { navbarElements } from "@/lib/pageConfig";
+import { getNavbarElements } from "@/lib/pageConfig";
 import Footer from "@/ui/Footer/Footer";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Short URL",
   description: "Shourt your URL | Proyect created by Manuel Pedreira",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Navbar elements={navbarElements} />
-        <main>{children}</main>
+        <Navbar elements={await getNavbarElements()} />
+        <main>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </main>
         <Footer />
       </body>
     </html>

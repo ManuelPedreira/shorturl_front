@@ -1,14 +1,26 @@
 import Link from "next/link";
 import styles from "./Footer.module.scss";
+import { getTranslations } from "next-intl/server";
 
-const Footer = () => {
+const Footer = async () => {
+  const t = await getTranslations("Footer");
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <p>Developed by <Link target="_blank" href={"https://github.com/ManuelPedreira"}>      
-          Manuel Pedreira
-          </Link>
-          </p>
+        <p>
+          {t.rich("developed_by", {
+            author: (author) => (
+              <Link
+                href="https://github.com/ManuelPedreira"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {author}
+              </Link>
+            ),
+          })}
+        </p>
       </div>
     </footer>
   );
