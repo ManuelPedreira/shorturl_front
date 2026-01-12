@@ -2,14 +2,20 @@ import { render, screen } from "@testing-library/react";
 import ErrorContainer from "../ErrorContainer";
 
 const errorMessage = "error-message";
-const children = <span data-testid={errorMessage} />;
 
 describe("ErrorContainer", () => {
   it("renders main elements", () => {
-    render(<ErrorContainer>{children}</ErrorContainer>);
+    render(
+      <ErrorContainer
+        title="title"
+        text="text"
+        description={errorMessage}
+        goBackButtonText="goBackButtonText"
+      />
+    );
 
     const tittle = screen.getByRole("heading", { level: 1 });
-    const message = screen.getByTestId(errorMessage);
+    const message = screen.getByText(errorMessage);
     const button = screen.getByLabelText("go-back-button");
 
     expect(tittle).toBeInTheDocument();
@@ -18,7 +24,14 @@ describe("ErrorContainer", () => {
   });
 
   it("links back to home", () => {
-    render(<ErrorContainer>{children}</ErrorContainer>);
+    render(
+      <ErrorContainer
+        title="title"
+        text="text"
+        description="description"
+        goBackButtonText="goBackButtonText"
+      />
+    );
 
     const link = screen.getByLabelText("go-back-link");
 
